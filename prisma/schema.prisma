@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Todos {
+  id        Int     @id @default(autoincrement())
+  text      String
+  completed Boolean @default(false)
+}
+
+model Apt {
+  id          Int    @id @default(autoincrement())
+  floor       Int
+  allFloor    Int
+  address     String
+  phoneNumber String
+  price       Int
+  rooms       Int
+  folder      Int
+  area        Int
+  preview     String
+}
+
+model Img {
+  id     Int    @id @default(autoincrement())
+  name   String
+  folder Int
+}
+
+model User {
+  id       Int       @id @default(autoincrement())
+  name     String
+  chatId   String
+  password String
+  Message  Message[]
+}
+
+model Message {
+  id     Int      @id @default(autoincrement())
+  text   String
+  date   DateTime @default(now()) @db.Timestamptz(6)
+  userId Int
+  User   User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user")
+}
