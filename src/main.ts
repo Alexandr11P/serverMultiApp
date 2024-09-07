@@ -6,7 +6,7 @@ import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors({ origin: ['http://multi.alexreactapp.ru', 'http://localhost:3000'] })
+  app.enableCors({ origin: ['http://multi.alexreactapp.ru'] })
   app.use(cookieParser())
   await app.listen(process.env.PORT);
   console.log('Server started on PORT', process.env.PORT)
